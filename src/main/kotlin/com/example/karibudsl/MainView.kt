@@ -15,16 +15,21 @@
  */
 package com.example.karibudsl
 
+import com.example.demo2.voyager.MomentLoop
 import com.github.mvysny.karibudsl.v10.*
 import com.github.mvysny.kaributools.setPrimary
 import com.vaadin.flow.component.Key
+import com.vaadin.flow.component.KeyPressEvent
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.dependency.CssImport
+import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.page.AppShellConfigurator
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.Route
 import com.vaadin.flow.server.PWA
+import java.awt.SystemColor.window
 
 /**
  * The main view contains a button and a click listener.
@@ -35,6 +40,8 @@ import com.vaadin.flow.server.PWA
 class MainView : KComposite() {
     private lateinit var nameField: TextField
     private lateinit var greetButton: Button
+    private lateinit var bigDiv: Div
+    val momentLoop = MomentLoop()
 
     // The main view UI definition
     private val root = ui {
@@ -48,6 +55,9 @@ class MainView : KComposite() {
             greetButton = button("Say hello") {
                 setPrimary(); addClickShortcut(Key.ENTER)
             }
+//            bigDiv = div {  }
+//            bigDiv.setSizeFull()
+//            bigDiv.setHeightFull()
         }
     }
 
@@ -58,6 +68,13 @@ class MainView : KComposite() {
         // Button click listeners can be defined as lambda expressions
         greetButton.onLeftClick {
             Notification.show("Hello, ${nameField.value}")
+        }
+        nameField.addKeyPressListener {keypressedEvent ->
+            val key = keypressedEvent.key
+            println("pressed $key")
+
+            val chr : Char = key.keys.get(0).toCharArray().get(0) //.toString().toCharArray().get(0)
+            momentLoop.inputCharTilAction(chr)
         }
     }
 }
