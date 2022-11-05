@@ -7,11 +7,19 @@ import java.util.*
 public class MomentLoop() {
 
     // config
-    val speed = 253;
-    val backSpeed = 82;
-    val distance = 60;
-    val turnDegree = 40
-    val turnSpeed = 82
+    var speed = 253;
+    var backSpeed = 253;
+    var distance = 60;
+    var turnDegree = 40
+    var turnSpeed = 253
+
+    val maxAllowedSpeed = 253
+    val maxAllowedSpeedDistance = 100
+
+    val maxAllowedTurnSpeed = 253
+    val maxAllowedTurnDegree = 360
+
+
 
     var gir = 1
 
@@ -29,6 +37,33 @@ public class MomentLoop() {
             println(inputChr)
             inputCharTilAction(inputChr)
         }
+    }
+
+    fun økForwardSpeed(int: Int){
+        speed += int
+        if (speed > maxAllowedSpeed) speed = maxAllowedSpeed
+        if (speed < maxAllowedSpeed) speed = 1
+    }
+    fun økForwardDistance(int: Int){
+        speed += int
+        if (speed > maxAllowedSpeed) speed = maxAllowedSpeed
+        if (speed < maxAllowedSpeed) speed = 1
+    }
+    fun økBackSpeed(int: Int){
+        backSpeed += int
+        if (backSpeed > maxAllowedSpeed) backSpeed = maxAllowedSpeed
+        if (backSpeed < maxAllowedSpeed) backSpeed = 1
+    }
+
+    fun økTurnSpeed(int: Int){
+        turnSpeed += int
+        if (turnSpeed > maxAllowedTurnSpeed) turnSpeed = maxAllowedTurnSpeed
+        if (turnSpeed < maxAllowedTurnSpeed) turnSpeed = 1
+    }
+    fun økTurnDegree(int: Int){
+        turnDegree += int
+        if (turnDegree > maxAllowedTurnDegree) turnDegree = maxAllowedTurnDegree
+        if (turnDegree < maxAllowedTurnDegree) turnDegree = 1
     }
 
     fun inputCharTilAction(inputChr: Char) {

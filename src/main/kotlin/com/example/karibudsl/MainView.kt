@@ -19,17 +19,13 @@ import com.example.demo2.voyager.MomentLoop
 import com.github.mvysny.karibudsl.v10.*
 import com.github.mvysny.kaributools.setPrimary
 import com.vaadin.flow.component.Key
-import com.vaadin.flow.component.KeyPressEvent
-import com.vaadin.flow.component.UI
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.Div
+import com.vaadin.flow.component.html.Label
 import com.vaadin.flow.component.notification.Notification
-import com.vaadin.flow.component.page.AppShellConfigurator
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.Route
-import com.vaadin.flow.server.PWA
-import java.awt.SystemColor.window
 
 /**
  * The main view contains a button and a click listener.
@@ -41,7 +37,15 @@ class MainView : KComposite() {
     private lateinit var nameField: TextField
     private lateinit var greetButton: Button
     private lateinit var bigDiv: Div
+    private lateinit var forwardSpeedLabel: Label
+    private lateinit var backSpeedLabel: Label
+
+
+    private lateinit var turnSpeedLabel: Label
+    private lateinit var turnDegreeLabel: Label
     val momentLoop = MomentLoop()
+
+
 
     // The main view UI definition
     private val root = ui {
@@ -74,6 +78,7 @@ class MainView : KComposite() {
             println("pressed $key")
 
             val chr : Char = key.keys.get(0).toCharArray().get(0) //.toString().toCharArray().get(0)
+
             momentLoop.inputCharTilAction(chr)
         }
     }
